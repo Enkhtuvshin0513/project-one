@@ -1,26 +1,12 @@
-class Player {
-  constructor(firstName, lastName, age, height, weight) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.height = height;
-    this.weight = weight;
+import dotenv from "dotenv";
+import express from "express";
 
-    this.score = 0;
-  }
+dotenv.config();
 
-  twoPoint() {
-    this.score = this.score + 2;
-  }
+const port = process.env.PORT || 3000;
 
-  threePoint() {
-    this.score = this.score + 3;
-  }
+const app = express();
 
-  result() {
-    return `${this.lastName} ${this.score} onoo awsan bn`;
-  }
-}
-
-const lebron = new Player("james", "lebron", 40, 7, 200);
-const durant = new Player("kevin", "durant", 36, 7, 200);
+app.listen(port, () => {
+  console.log(`app running on ${port}`);
+});
