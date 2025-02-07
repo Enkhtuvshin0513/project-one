@@ -50,7 +50,7 @@ export const playerSchema = new Schema(
     },
     history: [playerHobbySchema],
     historyObject: playerHobbySchema,
-    team: { type: mongoose.Schema.ObjectId, ref: teamSchema }
+    team: { type: mongoose.Schema.ObjectId, ref: "Team" }
   },
   {
     collection: "players",
