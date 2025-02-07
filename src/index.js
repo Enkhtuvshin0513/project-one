@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import { Player } from "./db/schemas/Player.js";
+import { Player } from "./db/models/Player.js";
+import { Team } from "./db/models/Team.js";
 
 dotenv.config();
 
@@ -17,13 +18,16 @@ const app = express();
 app.post("/", async (req, res) => {
   try {
     await Player.create({
-      firstName: "Dorj",
+      firstName: "AA      ",
       lastName: "dorj",
-      age: 17,
+      team: "67a5e99e200d24c0e93e9fbe",
+      age: 16,
       height: 180,
       weight: 80,
+      salary: 1000,
       history: [{ team: "lakers", awards: "mvp" }],
-      historyObject: { team: "lakers", awards: "mvp" }
+      historyObject: { team: "lakers", awards: "mvp" },
+      province: "ulaanbatar"
     });
     res.send("success");
   } catch (e) {
@@ -31,8 +35,17 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.post("/team", async (req, res) => {
+  try {
+    await Team.create({ name: "lakers" });
+    res.send("success");
+  } catch (e) {
+    res.send(`error: ${e.message}`);
+  }
+});
+
 app.get("/", async (req, res) => {
-  const player = await Player.find({ lastName: "dorj" });
+  const player = await Player.find({ lastName: "dorj" }).populate("team");
 
   res.send(player);
 });
